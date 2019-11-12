@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Controller
 public class WizardController {
 
@@ -30,7 +32,10 @@ public class WizardController {
 
         Wizard wizard = new Wizard();
         if (id != null) {
-            wizard = repository.findById(id).get();
+            Optional<Wizard> optionalWizard = repository.findById(id);
+            if (optionalWizard.isPresent()) {
+                wizard = optionalWizard.get();
+            }
         }
         model.addAttribute("wizard", wizard);
 
