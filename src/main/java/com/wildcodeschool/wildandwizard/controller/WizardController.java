@@ -52,7 +52,9 @@ public class WizardController {
     @GetMapping("/wizard/delete")
     public String deleteWizard(@RequestParam Long id) {
 
-        repository.deleteById(id);
+    	if (id != null) {
+    		repository.deleteById(id);
+    	}
 
         return "redirect:/wizards";
     }
